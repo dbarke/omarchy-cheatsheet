@@ -39,5 +39,6 @@ and `key` overrides the key cap for grouped bindings (e.g. `"1 … 9"`).
 
 Entries with `"herdr": "<action>"` instead of `desc` take their keys from the
 `[keys]` table of `~/.config/herdr/config.toml` (the first binding listed, with
-the prefix chord shown as one cap). Actions not set there are left out.
+the prefix chord shown as one cap; add `"chord": true` to prefer a binding
+without the prefix). Actions not set there are left out.
 Learned state lives in `~/.local/state/omarchy/cheatsheet-learned.json`.

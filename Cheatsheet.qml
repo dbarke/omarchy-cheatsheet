@@ -173,7 +173,15 @@ Item {
       if (e.herdr) {
         var specs = root.herdrKeys[e.herdr]
         if (!specs) continue
-        out.push({ desc: "herdr:" + e.herdr, label: e.label || e.herdr, hint: e.hint || "", combos: root.herdrCombos(specs[0], e.key) })
+        // "chord": true prefers a binding that skips the prefix (alt+right
+        // over prefix+n), falling back to the first one listed.
+        var spec = specs[0]
+        if (e.chord) {
+          for (var c = 0; c < specs.length; c++) {
+            if (specs[c].indexOf("prefix+") !== 0) { spec = specs[c]; break }
+          }
+        }
+        out.push({ desc: "herdr:" + e.herdr, label: e.label || e.herdr, hint: e.hint || "", combos: root.herdrCombos(spec, e.key) })
         continue
       }
       var found = root.bindings[e.desc]
@@ -345,7 +353,7 @@ Item {
             spacing: Style.spacing.xs
 
             Text {
-              text: "Learn Omarchy"
+              text: Object.keys(root.herdrKeys).length ? "Learn Omarchy & herdr" : "Learn Omarchy"
               color: root.foreground
               font.family: root.fontFamily
               font.pixelSize: Style.font.display
