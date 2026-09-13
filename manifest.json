@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "dbarke.cheatsheet",
+  "name": "Cheat sheet",
+  "version": "1.0.0",
+  "author": "dbarke",
+  "license": "MIT",
+  "description": "A staged keybinding cheat sheet for learning Omarchy: essentials first, power moves later, with keys you have learned ticked off.",
+  "kinds": [
+    "overlay"
+  ],
+  "keepLoaded": true,
+  "entryPoints": {
+    "overlay": "Cheatsheet.qml"
+  }
+}

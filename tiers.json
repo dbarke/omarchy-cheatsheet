@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Essentials",
+    "blurb": "The keys you need every day.",
+    "entries": [
+      { "desc": "Apps menu", "label": "Launch an app", "hint": "Type a few letters of its name, then Enter" },
+      { "desc": "Omarchy menu", "label": "Omarchy menu", "hint": "Settings, install software, themes, updates" },
+      { "desc": "Terminal", "label": "Terminal" },
+      { "desc": "Browser", "label": "Browser" },
+      { "desc": "File manager", "label": "File manager" },
+      { "desc": "Close window", "label": "Close window", "hint": "Instead of Alt+F4" },
+      { "desc": "Focus on left window", "key": "←↑↓→", "label": "Move focus between windows" },
+      { "desc": "Switch to workspace 1", "key": "1 … 9", "label": "Switch workspace", "hint": "Workspaces are your virtual desktops" },
+      { "desc": "Move window to workspace 1", "key": "1 … 9", "label": "Send window to workspace" },
+      { "desc": "Universal copy", "label": "Copy", "hint": "Works in terminals too, where Ctrl+C stops programs" },
+      { "desc": "Universal paste", "label": "Paste" },
+      { "desc": "System menu", "label": "Power menu", "hint": "Lock, suspend, restart, shut down" },
+      { "desc": "Keybindings", "label": "Search all keybindings", "hint": "When this sheet doesn't have it" }
+    ]
+  },
+  {
+    "name": "Faster",
+    "blurb": "Once the essentials are automatic.",
+    "entries": [
+      { "desc": "Full screen", "label": "Full screen" },
+      { "desc": "Toggle window floating/tiling", "label": "Float / tile window", "hint": "Floating windows behave like on Windows" },
+      { "desc": "Move window", "label": "Drag a window", "hint": "Hold the key, drag from anywhere in the window" },
+      { "desc": "Resize window", "label": "Resize a window" },
+      { "desc": "Swap window to the left", "key": "←↑↓→", "label": "Swap window position" },
+      { "desc": "Toggle window split", "label": "Flip split direction", "hint": "Side by side ↔ stacked" },
+      { "desc": "Focus on next window", "label": "Cycle windows" },
+      { "desc": "Former workspace", "label": "Jump back to last workspace" },
+      { "desc": "Screenshot", "label": "Screenshot", "hint": "Select a region; it lands on the clipboard" },
+      { "desc": "Clipboard manager", "label": "Clipboard history" },
+      { "desc": "Emojis", "label": "Emoji picker" },
+      { "desc": "Scratchpad terminal", "label": "Scratchpad terminal", "hint": "A terminal that slides in and out" },
+      { "desc": "Dismiss last notification", "label": "Dismiss notification" },
+      { "desc": "Toggle top bar", "label": "Hide / show the top bar" }
+    ]
+  },
+  {
+    "name": "Power",
+    "blurb": "For when you want to fly.",
+    "entries": [
+      { "desc": "Toggle window grouping", "label": "Group windows into tabs" },
+      { "desc": "Next window in group", "label": "Next tab in group" },
+      { "desc": "Pop window out (float & pin)", "label": "Pop window out", "hint": "Floats and stays on every workspace" },
+      { "desc": "Move window silently to workspace 1", "key": "1 … 9", "label": "Send window, stay here" },
+      { "desc": "Move window to scratchpad", "label": "Stash window in scratchpad" },
+      { "desc": "Move workspace to left monitor", "key": "←↑↓→", "label": "Move workspace to another monitor" },
+      { "desc": "Capture menu", "label": "Capture menu", "hint": "Screenshots, recordings, OCR" },
+      { "desc": "Extract text (OCR) from screenshot", "label": "Copy text from the screen" },
+      { "desc": "Color picker", "label": "Color picker" },
+      { "desc": "Calculator", "label": "Calculator" },
+      { "desc": "Set reminder", "label": "Set a reminder" },
+      { "desc": "Toggle nightlight", "label": "Night light" },
+      { "desc": "Theme menu", "label": "Change theme" },
+      { "desc": "Background switcher", "label": "Change wallpaper" },
+      { "desc": "Toggle window gaps", "label": "Toggle window gaps" },
+      { "desc": "Open notification history", "label": "Notification history" }
+    ]
+  }
+]
