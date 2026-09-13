@@ -59,5 +59,30 @@
       { "desc": "Toggle window gaps", "label": "Toggle window gaps" },
       { "desc": "Open notification history", "label": "Notification history" }
     ]
+  },
+  {
+    "name": "herdr",
+    "blurb": "Inside the terminal: panes, tabs and workspaces. Press the prefix, let go, then the key.",
+    "entries": [
+      { "herdr": "split_vertical", "label": "Split pane vertically" },
+      { "herdr": "split_horizontal", "label": "Split pane horizontally" },
+      { "herdr": "focus_pane_left", "key": "←↑↓→", "label": "Move focus between panes" },
+      { "herdr": "close_pane", "label": "Close pane", "hint": "Closes at once, no confirmation" },
+      { "herdr": "zoom", "label": "Zoom pane", "hint": "Fill the tab with one pane; again to restore" },
+      { "herdr": "last_pane", "label": "Jump back to last pane" },
+      { "herdr": "new_tab", "label": "New tab", "hint": "Tabs are the labels along the top" },
+      { "herdr": "next_tab", "label": "Next tab" },
+      { "herdr": "previous_tab", "label": "Previous tab" },
+      { "herdr": "switch_tab", "label": "Jump to tab" },
+      { "herdr": "rename_tab", "label": "Rename tab" },
+      { "herdr": "close_tab", "label": "Close tab" },
+      { "herdr": "next_workspace", "label": "Next workspace", "hint": "A workspace holds a set of tabs, like a project" },
+      { "herdr": "new_workspace", "label": "New workspace" },
+      { "herdr": "close_workspace", "label": "Close workspace", "hint": "Asks first" },
+      { "herdr": "next_agent", "label": "Jump to next agent" },
+      { "herdr": "copy_mode", "label": "Copy mode", "hint": "Scroll back and select text with the keyboard" },
+      { "herdr": "detach", "label": "Detach", "hint": "herdr keeps running; run herdr again to return" },
+      { "herdr": "help", "label": "All herdr keys" }
+    ]
   }
 ]

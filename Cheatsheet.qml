@@ -23,7 +23,9 @@ Item {
   property bool opened: false
   property var tiers: []
   property var bindings: ({})   // description -> [{ mods: [...], key: "..." }]
-  property var learned: ({})    // description -> true
+  property var herdrKeys: ({})  // herdr action -> ["prefix+x", "alt+esc"]
+  property string herdrPrefix: ""
+  property var learned: ({})    // description (or "herdr:<action>") -> true
   property int tierIndex: 0
   property int selectedIndex: -1
   property bool hideLearned: false
@@ -97,6 +99,57 @@ Item {
     root.rebuild()
   }
 
+  // The [keys] table of herdr's config.toml: `action = "spec"` or
+  // `action = ["spec", "spec"]`. Actions left at herdr's defaults aren't in
+  // the file, so entries naming them stay hidden like missing Hyprland binds.
+  function parseHerdrKeys(text) {
+    var out = ({})
+    var prefix = ""
+    var inKeys = false
+    var lines = String(text || "").split("\n")
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i].trim()
+      if (line.charAt(0) === "[" && line.indexOf("=") === -1) { inKeys = line === "[keys]"; continue }
+      if (!inKeys) continue
+      var m = line.match(/^([a-z_]+)\s*=\s*(.+)$/)
+      if (!m) continue
+      var specs = []
+      var re = /"([^"]*)"/g
+      var s
+      while ((s = re.exec(m[2])) !== null) specs.push(s[1])
+      if (specs.length === 0) continue
+      if (m[1] === "prefix") prefix = specs[0]
+      else out[m[1]] = specs
+    }
+    root.herdrPrefix = prefix
+    root.herdrKeys = out
+    root.rebuild()
+  }
+
+  function prettyHerdrKey(k) {
+    if (k === "1..9") return "1 … 9"
+    var up = k.toUpperCase()
+    if (root.keyNames[up] !== undefined) return root.keyNames[up]
+    if (up === "ENTER") return "Enter"
+    if (up === "ESC") return "Esc"
+    return k.length === 1 ? up : k.charAt(0).toUpperCase() + k.slice(1)
+  }
+
+  // "prefix+shift+k" -> [["Ctrl+Space"], ["Shift", "K"]]: the prefix chord is
+  // one cap, pressed and released before the rest.
+  function herdrCombos(spec, keyOverride) {
+    var parts = spec.split("+")
+    var combos = []
+    if (parts[0] === "prefix") {
+      combos.push([root.herdrPrefix ? root.herdrPrefix.split("+").map(root.prettyHerdrKey).join("+") : "Prefix"])
+      parts = parts.slice(1)
+    }
+    var caps = parts.map(root.prettyHerdrKey)
+    if (keyOverride) caps[caps.length - 1] = keyOverride
+    combos.push(caps)
+    return combos
+  }
+
   function loadTiers(text) {
     try { root.tiers = JSON.parse(text) } catch (e) { root.tiers = [] }
     root.rebuild()
@@ -117,6 +170,12 @@ Item {
     var entries = (tier && tier.entries) || []
     for (var i = 0; i < entries.length; i++) {
       var e = entries[i]
+      if (e.herdr) {
+        var specs = root.herdrKeys[e.herdr]
+        if (!specs) continue
+        out.push({ desc: "herdr:" + e.herdr, label: e.label || e.herdr, hint: e.hint || "", combos: root.herdrCombos(specs[0], e.key) })
+        continue
+      }
       var found = root.bindings[e.desc]
       if (!found || found.length === 0) continue
       // One combo per entry: the first one listed is the primary binding
@@ -190,6 +249,14 @@ Item {
     watchChanges: true
     printErrors: false
     onLoaded: root.loadTiers(text())
+    onFileChanged: reload()
+  }
+
+  FileView {
+    path: Quickshell.env("HOME") + "/.config/herdr/config.toml"
+    watchChanges: true
+    printErrors: false
+    onLoaded: root.parseHerdrKeys(text())
     onFileChanged: reload()
   }
 
@@ -306,7 +373,7 @@ Item {
                 required property int index
                 required property var modelData
                 readonly property bool active: index === root.tierIndex
-                readonly property var progress: { root.learned; root.bindings; return root.learnedCount(modelData) }
+                readonly property var progress: { root.learned; root.bindings; root.herdrKeys; return root.learnedCount(modelData) }
 
                 width: tabText.implicitWidth + Style.spacing.controlPaddingX * 2
                 height: tabText.implicitHeight + Style.spacing.controlPaddingY * 2
@@ -470,7 +537,7 @@ Item {
           id: footer
           width: parent.width
           horizontalAlignment: Text.AlignHCenter
-          text: "Click or Space: mark learned   ·   1–3 / Tab: switch tier   ·   H: "
+          text: "Click or Space: mark learned   ·   1–" + Math.max(1, root.tiers.length) + " / Tab: switch tier   ·   H: "
             + (root.hideLearned ? "show" : "hide") + " learned   ·   Super+K: all bindings   ·   Esc: close"
           color: root.foreground
           opacity: 0.5
