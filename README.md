@@ -36,4 +36,8 @@ o.bind("SUPER + F1", "Cheat sheet", "omarchy-shell shell toggle dbarke.cheatshee
 Edit `tiers.json`. Each entry names a binding by its description as shown in
 `omarchy menu keybindings --print`; `label` and `hint` are what the sheet shows,
 and `key` overrides the key cap for grouped bindings (e.g. `"1 … 9"`).
+
+Entries with `"herdr": "<action>"` instead of `desc` take their keys from the
+`[keys]` table of `~/.config/herdr/config.toml` (the first binding listed, with
+the prefix chord shown as one cap). Actions not set there are left out.
 Learned state lives in `~/.local/state/omarchy/cheatsheet-learned.json`.
