@@ -30,7 +30,7 @@ o.bind("SUPER + F1", "Cheat sheet", "omarchy-shell shell toggle dbarke.cheatshee
 | Key | Action |
 |---|---|
 | Click / `Space` | Mark learned |
-| `1`–`3`, `Tab` | Switch tier |
+| `1`–`4`, `Tab` | Switch tier |
 | `H` | Hide / show learned |
 | `Esc`, `Super+F1` | Close |
 

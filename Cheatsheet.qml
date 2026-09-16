@@ -443,7 +443,13 @@ Item {
               anchors.left: parent.left
               anchors.leftMargin: Style.spacing.lg
               anchors.verticalCenter: parent.verticalCenter
-              width: Math.round(row.width * 0.36)
+              // 36% keeps the labels aligned down the column, but a Row lays its
+              // children out past its own width rather than squeezing them, so a
+              // fixed width let wide combos (Super+Shift+Ctrl+Space, ←↑↓→,
+              // mouse_down) run straight over the label anchored to our right.
+              // Growing to fit pushes those few labels across instead; they
+              // elide, and no combo can overlap whatever is in tiers.json.
+              width: Math.max(Math.round(row.width * 0.36), implicitWidth)
               spacing: Style.spacing.lg
               opacity: row.isLearned ? 0.45 : 1
 
