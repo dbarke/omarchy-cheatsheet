@@ -4,11 +4,14 @@ A staged keybinding cheat sheet for [Omarchy](https://omarchy.org/): essentials
 first, power moves later, with the keys you've learned ticked off.
 
 `Super+K` lists every binding, which is great for looking things up and too much
-for learning. This overlay teaches in three tiers (Essentials, Faster, Power)
-and tracks your progress per tier.
+for learning. This overlay teaches in tiers — Essentials, Faster, Power, and a
+herdr tier for the terminal — and tracks your progress per tier.
 
 Keys are read live from `omarchy-menu-keybindings --print`, so rebinds show up
 automatically and entries whose binding doesn't exist are hidden.
+
+![The Essentials tier: keys on the left, what they do on the right, learned ones
+ticked and dimmed](preview.png)
 
 ## Install
 
